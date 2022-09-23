@@ -1,0 +1,111 @@
+<!-- <div class="container ">
+<form class="text-center border border-light p-5" [formGroup]="registerForm" (ngSubmit)="register()"> 
+   <p class="h4 mb-4">Register</p>
+
+
+   <div class="container">
+   <div class="row">
+     <div class="col-3">
+   <label class="form-label">Profile Picture:</label>
+  </div>
+  <div class="col-2">
+   <input  type="file" (change)="onFileSelected($event)" formcontrolName="image">
+   
+  </div>
+</div>
+</div>
+
+   <div class="form-row mb-4">
+     <div class="col mt-3">
+      <input type="text"  class="form-control" placeholder="Username" formControlName="username">
+     </div>
+
+   </div>
+   <input type="email"  class="form-control mb-4" placeholder="E-mail" formControlName="email">
+   <input type="password" class="form-control" placeholder="Password"
+     aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="password">
+   <br/>
+   <input type="password" class="form-control" placeholder="Confirm Password"
+     aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="confirmpassword">
+   <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+   <hr>
+   <p>Already a member?
+    <a class="register" (click)="redirect()">Login</a>
+  </p>
+ </form>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container-xl px-4 mt-4">
+  <div class="row">
+      <div class="col-xl-12">
+          <div class="card mb-4">
+              <div  class="card-header text-center h4"><i class="fa-regular fa-user"></i>&#160;Register</div>
+              <div class="card-body">
+                  <form [formGroup]="registerForm" (ngSubmit)="register()">
+                      
+                      <div class="mb-3">
+                          <label class="small mb-1" for="inputUsername">Username * </label>
+                          <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" formControlName="username">
+                      </div>
+                      
+                      <div class="row gx-3 mb-3">
+                  
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="inputFirstName">First name *</label>
+                              <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" formControlName="firstname">
+                          </div>
+                    
+                          <div class="col-md-6">
+                              <label class="small mb-1" for="inputLastName">Last name *</label>
+                              <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" formControlName="lastname">
+                          </div>
+                      </div>
+                      
+                      
+                      <div class="mb-3">
+                          <label class="small mb-1" for="inputEmailAddress">Email address *</label>
+                          <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" formControlName="email">
+                      </div>
+                      
+                      
+                      <div class="row gx-3 mb-3">
+                          
+                        <div class="col-md-6">
+                            <label class="small mb-1" >Password *</label>
+                            <input class="form-control" type="password" placeholder="Enter your password" formControlName="password">
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label class="small mb-1" >Re-type Password *</label>
+                            <input class="form-control" type="password" placeholder="Enter your password" formControlName="confirmpassword">
+                        </div>
+                    </div>
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" formControlName="isAdmin" >
+                      <label class="form-check-label" >
+                        Is Admin?
+                      </label>
+                    </div>
+                      
+                      <button class="btn btn-primary" type="button" (click)="register()" [disabled]="registerForm.invalid"><i class="fa-regular fa-user"></i>&#160;Register</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
