@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
   newObj: any;
   id: any;
   newObjs: any;
-
+  userData:any;
   POSTS: any;
   page: number = 1;
   count: number = 0;
@@ -25,7 +25,11 @@ export class UserComponent implements OnInit {
   password:any;
   isAdmin:boolean = false;
   adminUser :boolean = false;
-  
+  parseData : any;
+  usersData : any;
+  parserData : any;
+
+
   constructor(private router : Router,
               private ToastService: NgToastService,
               private apiservice: ExampleService,
@@ -35,14 +39,14 @@ export class UserComponent implements OnInit {
                }
 
   ngOnInit(): void {
-    this.username = localStorage.getItem("username");
-    this.password = localStorage.getItem("password");
-
-    this.apiservice.getAdminUser(this.username, this.password,this.isAdmin).subscribe((data: any) =>{
-      if(data.length == 0){
-        this.adminUser = true;
-      }
-    });
+    this.userData = localStorage.getItem("userData");
+    this.parseData = JSON.parse(this.userData);
+    this.username = this.parseData.username;
+    this.password = this.parseData.password;
+    this.isAdmin = this.parseData.admin;
+    if (this.parseData.admin == false){
+      this.adminUser = true;
+    }
     this.getUser();
 
   }
@@ -52,10 +56,8 @@ export class UserComponent implements OnInit {
     username : new FormControl(''),
     firstname: new FormControl(''),
     lastname: new FormControl(''),
-    organization: new FormControl(''),
     email: new FormControl(''),
-    image: new FormControl(''),
-    isAdmin : new FormControl(''),
+    admin : new FormControl(''),
     password : new FormControl(''),
     confirmpassword : new FormControl('')
   })
@@ -74,19 +76,11 @@ export class UserComponent implements OnInit {
   searchForm = new FormGroup({
     query : new FormControl('')
   })
-  
 
-  getData(){
-    this.apiservice.getallData().subscribe(data => {
-      this.getuser = data;
-    });
-  }
 
   getUser(){
-    this.apiservice.getuserData().subscribe(data => {
-      this.POSTS = data;
+    this.apiservice.getUserList().subscribe(data => {
       this.tableData = data;
-      this.profileForm.reset();
     })
   }
 
@@ -130,15 +124,6 @@ export class UserComponent implements OnInit {
   }
 
 
-  // searchQuery(){
-  //   this.searchValue = this.searchForm.value.query;
-  //   this.searchValue = this.searchValue.trim();
-  //   this.apiservice.searchQuery(this.searchValue).subscribe(newData => {
-     
-  //     this.tableData = newData;
-  //   })
-  // }
-
   deleteUser(num:number){
    
     this.apiservice.deleteUser(num).subscribe((data: any) => {
@@ -151,19 +136,18 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(num:any){
+    localStorage.setItem("oneUser", JSON.stringify(num));
     this.displayReg = "block";
     for(this.userid of this.tableData){
       if(this.userid.id == num.id){
-        this.profileForm.patchValue({
-          user_id:num.id,
-          firstname: num.firstname,
-          lastname: num.lastname,
-          organization: num.organization,
-          email: num.email,
-          password : num.password,
-          isAdmin : num.isAdmin,
-          username : num.username,
-          confirmpassword: num.confirmpassword
+        this.profileForm = new FormGroup({
+          username : new FormControl(this.userid.username),
+          firstname: new FormControl(this.userid.firstname),
+          lastname: new FormControl(this.userid.lastname),
+          email: new FormControl(this.userid.email),
+          admin : new FormControl(this.userid.admin),
+          password : new FormControl(this.userid.password),
+          confirmpassword : new FormControl(this.userid.confirmpassword)
         })
       }
     }
@@ -171,9 +155,11 @@ export class UserComponent implements OnInit {
 
   update(){
     for(this.userid of this.tableData){
-      if(this.userid.id == this.profileForm.value.user_id){
+      this.usersData = localStorage.getItem("oneUser");
+    this.parserData = JSON.parse(this.usersData);
+      if(this.userid.id == this.parserData.id){
             this.closePopup();
-            this.apiservice.updateUser(this.userid.id,this.profileForm.value).subscribe(data => {
+            this.apiservice.updateUser(this.parserData.id,this.profileForm.value).subscribe(data => {
               this.ToastService.success({detail:"Success Message",summary:"Data Updated Successfully",duration:2000});
               this.getUser();
               })
@@ -181,13 +167,6 @@ export class UserComponent implements OnInit {
     }
     
     
-  }
-
-  registerUser(){
-    this.apiservice.addData(this.profileForm.value).subscribe(data =>{
-      this.getUser();
-      this.ToastService.success({detail:"Success Message",summary:"Data Added Successfully",duration:2000});
-    });
   }
 
 

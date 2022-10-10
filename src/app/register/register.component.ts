@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
 
   register(){
-    this.registerForm.value.image =  this.selectfiles;
     if(this.registerForm.value.isAdmin == ""){
       this.registerForm.value.isAdmin = false
     }

@@ -11,10 +11,6 @@
         </li>
       </ul>
       
-      <!-- <form class="d-flex" [formGroup]="searchForm">
-        <input class="form-control me-2" type="text" placeholder="Search" formControlName="query" >
-        <button class="btn btn-primary" type="button" (click)="searchQuery()"><i class="fa-solid fa-magnifying-glass"></i></button>
-      </form> -->
    </div>
   </div>
 </nav>
@@ -22,21 +18,11 @@
 <br><br>
 
 
-<!-- <br><br> -->
-
-
-
-
-
-
-
-<!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">ADD DATA <i class="fa-solid fa-plus"></i></button> -->
-
 
 <br><br>
 
 
-<div class="container mt-3" *ngIf="adminUser; else elsepart" >
+<div class="container mt-3" *ngIf="isAdmin; else elsepart" >
    
   <table class="table table-bordered table-hover table-dark" >
     <thead>
@@ -56,15 +42,15 @@
         currentPage: page,
         totalItems: count
       }; let i = index">
-      <!-- <div *ngIf="data.isAdmin"> -->
+      
         <td>{{data.username}}</td>
         <td>{{data.firstname}}</td>
         
         <td>{{data.email}}</td>
-        <td>{{data.isAdmin}}</td>
+        <td>{{data.admin}}</td>
         <td><i class="cursor" (click)="updateUser(data)"> <i class="fa-solid fa-user-pen"></i></i></td>
         <td><i class="cursor"(click)="deleteUser(data.id)"><i class="fa-solid fa-trash"></i></i></td>
-      <!-- </div> -->
+     
       </tr>
     
       
@@ -81,8 +67,7 @@
 </div>
 
 <ng-template #elsepart>
-  <!-- <h2 class="text-center">Data not Available</h2> -->
-   <!-- Header -->
+ 
    <header class="pt2 pb1 align--center">
     <div class="container">
         <p>Welcome to</p>
@@ -90,14 +75,14 @@
     </div>
 </header>
 
-<!-- Body -->
+
 <main>
     
     <div class="container">
 
-        <!-- Info -->
+       
         <section class="grid-row grid-row--center">
-            <!-- Cabin -->
+           
             <div class="grid-column span-half pt3 pb3 mobile-m order-1 reveal-on-scroll is-revealing">
                 <div class="relative">
                     <img class="info-image relative z2" src="../../assets/img/cabin.jpg" alt="Cabin">
@@ -108,7 +93,7 @@
                 <h3>Cabin</h3>
                 <p>Illa argumenta propria videamus, cur omnia sint paria peccata. Quamquam te quidem video minime esse deterritum. Beatus sibi videtur esse moriens. In qua quid est boni praeter summam&nbsp;voluptatem.</p>
             </div>
-            <!-- Teepees -->
+           
             <div class="grid-column span-half pt3 pb3 mobile-m order-4">
                 <h3>Teepees</h3>
                 <p>A quibus propter discendi cupiditatem videmus ultimas terras esse peragratas. Laelius clamores sofòw ille so lebat Edere compellans gumias ex ordine&nbsp;nostros.</p>
@@ -119,7 +104,7 @@
                     <div class="pattern pattern--right-middle absolute z1"></div>
                 </div>
             </div>
-            <!-- Fishing -->
+          
             <div class="grid-column span-half pt3 pb3 mobile-m order-5 reveal-on-scroll is-revealing">
                 <div class="relative">
                     <img class="info-image relative z2" src="../../assets/img/fishing.jpg" alt="Fishing">
@@ -130,7 +115,7 @@
                 <h3>Fishing</h3>
                 <p>Que Manilium, ab iisque M. Intellegi quidem, ut propter aliam quampiam rem, verbi gratia propter voluptatem, nos amemus; An eum locum libenter invisit&nbsp;ultimas.</p>
             </div>
-            <!-- Archery -->
+           
             <div class="grid-column span-half pt3 pb3 mobile-m order-8">
                 <h3>Archery</h3>
                 <p>At ille pellit, qui permulcet sensum voluptate. Quid in isto egregio tuo officio et tanta fide-sic enim existimo-ad corpus refers? Nec vero sum nescius esse utilitatem in&nbsp;historia.</p>
@@ -141,7 +126,7 @@
                     <div class="pattern pattern--right-down absolute z1"></div>
                 </div>
             </div>
-            <!-- Canoeing -->
+           
             <div class="grid-column span-half pt3 pb3 mobile-m order-9 reveal-on-scroll is-revealing">
                 <div class="relative">
                     <img class="info-image relative z2" src="../../assets/img/canoeing.jpg" alt="Canoeing">
@@ -164,70 +149,6 @@
 
 
 </ng-template>
-
-
-
-<div class="modal" id="myModal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-  <div class="modal-dialog">
-    <div class="modal-content">    
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closePopup()"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container bootstrap snippets bootdey">
-          <h1 class="text-primary">Add Profile</h1>
-            <hr>
-        <div class="row">
-    
-            <div class="col-md-12 personal-info">
-              <h3>Personal info</h3>
-              
-              <form class="form-horizontal" role="form" [formGroup]="profileForm"  >
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">First name:</label>
-                  <div class="col-lg-8">
-                    <input class="form-control" type="text" placeholder="Enter First Name" formControlName="firstname" value="">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Last name:</label>
-                  <div class="col-lg-8">
-                    <input class="form-control" type="text" placeholder="Enter Last Name" formControlName="lastname" value="">
-                  </div>
-                </div>
-
-                <!-- <div class="form-check">
-                  <label class="form-check-label" >
-                    Is Admin?
-                  </label>
-                  <input class="form-check-input" type="checkbox" formControlName="isAdmin" >
-                 
-                </div> -->
-                <!-- <div class="form-group">
-                  <label class="col-lg-3 control-label">Company:</label>
-                  <div class="col-lg-8">
-                    <input class="form-control" type="text" placeholder="Enter Company Name" formControlName="organization" value="">
-                  </div>
-                </div> -->
-                <div class="form-group">
-                  <label class="col-lg-3 control-label">Email:</label>
-                  <div class="col-lg-8">
-                    <input class="form-control" type="text" placeholder="Enter Mail Id" formControlName="email" value="">
-                  </div>
-                </div>
-              </form>
-            </div>
-        </div>
-      </div>
-      <hr>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal"(click)="registerUser()" >Save</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closePopup()">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 
@@ -259,6 +180,16 @@
               <h3>Personal info</h3>
               
               <form class="form-horizontal" role="form" [formGroup]="profileForm"  >
+                
+                <div class="form-group">
+                  <label class="col-lg-3 control-label">Username:</label>
+                  <div class="col-lg-8">
+                    <input class="form-control" type="text" placeholder="Enter User Name" formControlName="username" value="">
+                  </div>
+                </div>
+
+                
+
                 <div class="form-group">
                   <label class="col-lg-3 control-label">First name:</label>
                   <div class="col-lg-8">
@@ -276,15 +207,10 @@
                   <label class="form-check-label" >
                     Is Admin?
                   </label>
-                  <input class="form-check-input" type="checkbox" formControlName="isAdmin" value="" >
+                  <input class="form-check-input" type="checkbox" formControlName="admin" value="" >
                  
                 </div>
-                <!-- <div class="form-group">
-                  <label class="col-lg-3 control-label">Company:</label>
-                  <div class="col-lg-8">
-                    <input class="form-control" type="text" placeholder="Enter Company Name" formControlName="organization" value="">
-                  </div>
-                </div> -->
+              
                 <div class="form-group">
                   <label class="col-lg-3 control-label">Email:</label>
                   <div class="col-lg-8">

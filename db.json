@@ -1,13 +1,15 @@
 {
   "user": [
     {
+      "user_id": 2,
       "username": "karthick",
       "firstname": "karthick",
-      "lastname": "ravikumar",
+      "lastname": "ravi",
       "email": "r.karthick@ltts.com",
+      "image": null,
+      "isAdmin": true,
       "password": "123456",
       "confirmpassword": "123456",
-      "isAdmin": true,
       "id": 2
     },
     {
@@ -21,6 +23,27 @@
       "password": "123456",
       "confirmpassword": "123456",
       "id": 3
+    },
+    {
+      "user_id": 4,
+      "username": "newuser",
+      "firstname": "ones",
+      "lastname": "two",
+      "email": "one@gmail.com",
+      "isAdmin": false,
+      "password": "123456",
+      "confirmpassword": "123456",
+      "id": 4
+    },
+    {
+      "username": "noadmin",
+      "firstname": "12111",
+      "lastname": "1111",
+      "email": "master@gmail.com",
+      "password": "111111",
+      "confirmpassword": "111111",
+      "isAdmin": false,
+      "id": 5
     }
   ],
   "comments": [

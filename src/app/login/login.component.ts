@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ExampleService } from '../example.service';
+import { Login } from '../login';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { ExampleService } from '../example.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  logins : Login = new Login();
   username: string | undefined;
   password: string | undefined;
   constructor(private apiservice: ExampleService, private router: Router, private ToastService: NgToastService) { }
@@ -25,12 +26,15 @@ export class LoginComponent implements OnInit {
  });
 
  login(){
+  this.logins.username = this.loginForm.value.username;
+    this.logins.password = this.loginForm.value.password;
   let user= this.loginForm.value.username;
   let pass= this.loginForm.value.password;
   localStorage.setItem("username",user);
   localStorage.setItem("password",pass);
-  this.apiservice.login(user, pass).subscribe((data: any) =>{
-    if(data.length == 1){
+  this.apiservice.login(this.logins).subscribe((data: any) =>{
+    if(data != null){
+      localStorage.setItem("userData", JSON.stringify(data));
       localStorage.setItem("isUserLoggedIn","true");
       this.router.navigate(['/user']);
       this.ToastService.success({detail:"Success Message",summary:"Login Successful",duration:2000});
