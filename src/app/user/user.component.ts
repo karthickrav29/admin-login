@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { ExampleService } from '../example.service';
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -19,7 +20,7 @@ export class UserComponent implements OnInit {
   POSTS: any;
   page: number = 1;
   count: number = 0;
-  tableSize: number = 7;
+  tableSize: number = 5;
   tableSizes: any = [3, 6, 9, 12];
   username:any;
   password:any;
@@ -28,7 +29,7 @@ export class UserComponent implements OnInit {
   parseData : any;
   usersData : any;
   parserData : any;
-
+  searchQuery:any;
 
   constructor(private router : Router,
               private ToastService: NgToastService,
@@ -165,7 +166,18 @@ export class UserComponent implements OnInit {
               })
         }
     }
-    
+  }
+
+  searchPosts(query:any){
+    if(query != null){
+      this.apiservice.searchQuery(query).subscribe(data => {
+        if(data == ''){
+          this.tableData = null;
+        }else{
+          this.tableData = data;
+        }
+      })
+    }
     
   }
 
